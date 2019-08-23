@@ -24,7 +24,7 @@
     .menu-item span{
         display: inline-block;
         overflow: hidden;
-        width: 69px;
+        width: 100%;
         text-overflow: ellipsis;
         white-space: nowrap;
         vertical-align: bottom;
@@ -37,7 +37,7 @@
         font-size: 16px;
     }
     .collapsed-menu span{
-        width: 0px;
+        width: 0;
         transition: width .2s ease;
     }
     .collapsed-menu i{
@@ -55,50 +55,59 @@
         <Layout>
             <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
                 <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-                    <MenuItem name="1-1">
-                        <Tooltip :content="menu1" v-show="toolshow" theme='light' placement="right">
-                            <Icon type="ios-navigate"></Icon>
-                        </Tooltip>
-
-                        <span>{{ menu1 }}</span>
+                    <MenuItem name="1-1" @click.native="getBread"  class="flex-box flex-col-c"  to="/companyinfomanage">
+                        <Icon type="ios-navigate"></Icon>
+                        <span>企业信息管理</span>
                     </MenuItem>
-                    <MenuItem name="1-2">
+                    <MenuItem name="1-2" @click.native="getBread" class="flex-box flex-col-c" to="/loadmessage">
                         <Icon type="ios-search"></Icon>
-                        <span>Option 2</span>
+                        <span>员工资料上传</span>
                     </MenuItem>
-                    <MenuItem name="1-3">
+                    <MenuItem name="1-3" class="flex-box flex-col-c">
                         <Icon type="ios-settings"></Icon>
-                        <span>Option 3</span>
+                        <span>当前用户列表</span>
+                    </MenuItem>
+                    <MenuItem name="1-4" class="flex-box flex-col-c">
+                        <Icon type="ios-settings"></Icon>
+                        <span>任务单上传</span>
+                    </MenuItem>
+                    <MenuItem name="1-5" class="flex-box flex-col-c">
+                        <Icon type="ios-settings"></Icon>
+                        <span>任务单付款</span>
+                    </MenuItem>
+                    <MenuItem name="1-6" class="flex-box flex-col-c">
+                        <Icon type="ios-settings"></Icon>
+                        <span>任务单付款</span>
                     </MenuItem>
                 </Menu>
             </Sider>
             <Layout>
-                <Header :style="{padding: 0}" class="layout-header-bar">
-                    <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
+                <Header :style="{padding: 0}" class="flex-box flex-col-c flex-b layout-header-bar">
+                    <div class="flex-box flex-col-c">
+                        <Icon @click.native="collapsedSider" :style="{margin: '0 20px'}" type="md-menu" size="36"></Icon>
+                        <img style="width:120px" src="../assets/images/logo_01.png" alt="">
+                    </div>
+                    <headerBar></headerBar>
                 </Header>
-                <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
-                    Content
+                <Content :style="{margin: '5px', background: '#fff', minHeight: '260px' , overflow: 'auto' }">
+                    <breadCrumb :currentPage="bread"></breadCrumb>
+                    <router-view></router-view>
                 </Content>
             </Layout>
         </Layout>
     </div>
 </template>
 <script>
+import headerBar from "./Index/headerBar"
+import breadCrumb from "./Index/breadcrumb"
     export default {
         data () {
             return {
                 isCollapsed: false,
-                toolshow: false,
-                menu1: "option1"
+                bread:"企业信息管理"
             }
         },
         computed: {
-            rotateIcon () {
-                return [
-                    'menu-icon',
-                    this.isCollapsed ? 'rotate-icon' : ''
-                ];
-            },
             menuitemClasses () {
                 return [
                     'menu-item',
@@ -109,12 +118,17 @@
         methods: {
             collapsedSider () {
                 this.$refs.side1.toggleCollapse();
-                if(this.isCollapsed == true){
-                    this.toolshow = true
-                }else{
-                    this.toolshow = false
-                }
+            },
+            getBread(e){
+                this.bread = e.path[0].innerText
             }
-        }
+        },
+        components:{
+            headerBar,
+            breadCrumb
+        },
+        created() {
+            
+        },
     }
 </script>

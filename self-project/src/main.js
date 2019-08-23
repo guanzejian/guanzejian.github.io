@@ -1,29 +1,24 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueRouter from 'vue-router'
+import Routers from './router.js'
+import iview from 'iview/dist/iview.js'
+import 'iview/dist/styles/iview.css'
 
-import "./assets/normalize.css"   // 引入初始化的css
-import 'iview/dist/styles/iview.css';
+Vue.use(VueRouter);
+Vue.use(iview);
 
+import "./assets/css/normalize.css"   // 引入初始化的css
+import "./assets/css/ssbase.css"   // 引入初始化的css
 
-import { Button,Table,Layout,Header,Sider,Content,Footer,Menu,MenuItem,Icon,Tooltip } from 'iview';
-Vue.component('Button', Button);
-Vue.component('Table', Table);
-Vue.component('Layout',Layout);
-Vue.component('Header',Header);
-Vue.component('Sider',Sider);
-Vue.component('Content',Content);
-Vue.component('Footer',Footer);
-Vue.component('Menu',Menu);
-Vue.component('MenuItem',MenuItem);
-Vue.component('Icon',Icon);
-Vue.component('Tooltip',Tooltip);
+const RouterConfig = {
+  routes: Routers
+};
 
-
-
-
-
+var router =new VueRouter(RouterConfig);
 Vue.config.productionTip = false
 
 new Vue({
+  router,
   render: h => h(App),
 }).$mount('#app')
