@@ -16,7 +16,7 @@
         margin: 15px auto;
     }
     .menu-icon{
-        transition: all .3s;
+    transition: all .3s;
     }
     .rotate-icon{
         /* transform: rotate(-90deg); */
@@ -54,7 +54,7 @@
     <div class="layout">
         <Layout>
             <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
-                <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
+                <Menu active-name="1-1" theme="dark" width="auto" :class="menuitemClasses">
                     <MenuItem name="1-1" @click.native="getBread"  class="flex-box flex-col-c"  to="/companyinfomanage">
                         <Icon type="ios-navigate"></Icon>
                         <span>企业信息管理</span>
@@ -128,7 +128,8 @@ import breadCrumb from "./Index/breadcrumb"
             breadCrumb
         },
         created() {
-            
+
+
         },
     }
 </script>

@@ -18,6 +18,12 @@ const RouterConfig = {
 var router =new VueRouter(RouterConfig);
 Vue.config.productionTip = false
 
+// 解决点击两次路由 报错的问题
+const routerPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
+
 new Vue({
   router,
   render: h => h(App),
