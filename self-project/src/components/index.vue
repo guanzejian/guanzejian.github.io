@@ -54,7 +54,8 @@
     <div class="layout">
         <Layout>
             <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
-                <Menu active-name="1-1" theme="dark" width="auto" :class="menuitemClasses">
+                <Menu active-name="1-0" theme="dark" width="auto" :class="menuitemClasses">
+                    <router-link to="/" name='1-0' v-show="false"></router-link>
                     <MenuItem name="1-1" @click.native="getBread"  class="flex-box flex-col-c"  to="/companyinfomanage">
                         <Icon type="ios-navigate"></Icon>
                         <span>企业信息管理</span>
@@ -98,6 +99,7 @@
     </div>
 </template>
 <script>
+
 import headerBar from "./Index/headerBar"
 import breadCrumb from "./Index/breadcrumb"
     export default {
@@ -125,7 +127,7 @@ import breadCrumb from "./Index/breadcrumb"
         },
         components:{
             headerBar,
-            breadCrumb
+            breadCrumb,
         },
         created() {
 

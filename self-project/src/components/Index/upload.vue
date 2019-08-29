@@ -1,104 +1,131 @@
 <template>
-  <div>
-    <div class="demo-upload-list" v-for="item in uploadList">
-      <div class="demo-upload-list-cover">
-        <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
-      </div>
+    <div class="upload-box">
+        <template v-if="file !== null">
+            <span v-show="formatError == false">{{ file.name }}</span>
+            <div class="demo-upload-list-cover">
+                <Icon type="ios-eye-outline" @click.native="handleView(file.name)"></Icon>
+                <Icon type="ios-trash-outline" @click.native="handleRemove(file)"></Icon>
+            </div>
+        </template>
+        <Upload
+            :before-upload="handleUpload"
+            :format="Format"
+            :on-format-error="handleFormatError"
+            action="//jsonplaceholder.typicode.com/posts/">
+            <Icon v-show="file == null" type="ios-camera" class="camera-i" size="50"></Icon>
+            <img v-show="file !== null" :src="imgurl" alt="" width="200">
+        </Upload>
+
+         <Modal title="View Image" v-model="visible">
+            <img :src="imgurl" v-if="visible" style="width: 100%">
+        </Modal>
     </div>
-    <Upload
-      ref="upload"
-      :show-upload-list="false"
-      :format="['jpg','jpeg','png']"
-      :max-size="2048"
-      :before-upload="handleBeforeUpload"
-      :on-format-error="handleFormatError"
-      :on-exceeded-size="handleMaxSize"
-      type="drag"
-      action="//jsonplaceholder.typicode.com/posts/"
-      style="display: inline-block;width:58px;"
-    >
-      <div style="width: 58px;height:58px;line-height: 58px;">
-        <Icon type="camera" size="20"></Icon>
-      </div>
-    </Upload>
-  </div>
 </template>
-    
-    <script>
-export default {
-  methods: {
-    data() {
-      return { uploadList: [] };
-    },
-    handleBeforeUpload(file) {
-      // 创建一个 FileReader 对象
-      let reader = new FileReader(); // readAsDataURL 方法用于读取指定 Blob 或 File 的内容
-      // 当读操作完成，readyState 变为 DONE，loadend 被触发，此时 result 属性包含数据：URL（以 base64 编码的字符串表示文件的数据）
-      // 读取文件作为 URL 可访问地址
-      reader.readAsDataURL(file);
-      const _this = this;
-      reader.end = function(e) {
-        file.url = reader.result;
-        _this.uploadList.push(file);
-      };
-    },
-    handleRemove(file) {
-      this.uploadList.splice(this.uploadList.indexOf(file), 1);
-    },
-    handleFormatError(file) {
-      this.$Notice.warning({
-        title: "文件格式不正确",
-        desc:
-          "文件 " + file.name + " 格式不正确，请上传 jpg 或 png 格式的图片。"
-      });
-    },
-    handleMaxSize(file) {
-      this.$Notice.warning({
-        title: "超出文件大小限制",
-        desc: "文件 " + file.name + " 太大，不能超过 2M。"
-      });
+<script>
+    export default {
+        props:{
+            Format: Array
+        },
+        data () {
+            return {
+                file: null,
+                loadingStatus: false,
+                imgurl:'',
+                visible:false,
+                formatError:false
+            }
+        },
+        methods: {
+            handleView (name) {
+                this.visible = true
+            },
+            handleRemove (file) {
+                // this.imgurl = '';
+                this.file = null;
+                this.visible = false;
+                this.$Notice.success({title:'删除成功！'})
+                this.formatError = false
+            },
+            async handleFormatError(file){
+                await this.$Notice.warning({
+                    title: '选取文件格式有误',
+                });
+                this.formatError = true
+                console.log(123)
+            },
+            async handleUpload (file) {
+                //图片上传前事件
+                console.log(456)
+                this.file = await file //需要传给后台的file文件
+                const reader = new FileReader()
+                reader.readAsDataURL(file)
+                reader.onload = () => {
+                    const _base64 = reader.result
+                    this.imgurl = _base64 //将_base64赋值给图片的src，实现图片预览
+                }
+                return false//阻止图片继续上传，使得form表单提交时统一上传
+  
+            },
+            
+            // upload () {
+            //     this.loadingStatus = true;
+            //     setTimeout(() => {
+            //         this.file = null;
+            //         this.loadingStatus = false;
+            //         this.$Message.success('Success')
+            //     }, 1500);
+            // }
+        }
     }
-  }
-};
 </script>
-<style scoped>
-.demo-upload-list {
-  display: inline-block;
-  width: 60px;
-  height: 60px;
-  text-align: center;
-  line-height: 60px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  overflow: hidden;
-  background: #fff;
-  position: relative;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  margin-right: 4px;
-}
-.demo-upload-list img {
-  width: 100%;
-  height: 100%;
-}
-.demo-upload-list-cover {
-  display: none;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.6);
-}
-.demo-upload-list:hover .demo-upload-list-cover {
-  display: block;
-}
-.demo-upload-list-cover i {
-  color: #fff;
-  font-size: 20px;
-  cursor: pointer;
-  margin: 0 2px;
-}
-.ivu-icon {
-  line-height: 58px;
-}
+<style>
+ .upload-box{
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #fff;
+        position: relative;
+        box-shadow: 0 1px 1px rgba(0,0,0,.2);
+        margin-right: 4px;
+        vertical-align: middle;
+    }
+    .ivu-upload{
+        width: 100%;
+        height: 100%;
+    }
+    .ivu-upload-select {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+  
+    .demo-upload-list-cover{
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,.6);
+
+    }
+    .upload-box:hover .demo-upload-list-cover{
+        /* display: block; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .demo-upload-list-cover i{
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        margin: 0 2px;
+    }
 </style>
+

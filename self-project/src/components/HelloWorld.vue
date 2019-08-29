@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <table>{{ msg }}</table>
+    <p>{{ msg }}</p>
    
   </div>
 </template>
@@ -8,9 +8,14 @@
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+  // props: {
+  //   msg: String
+  // }
+  data() {
+    return {
+      msg:"welcome! "
+    }
+  },
 }
 </script>
 
