@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <p>上传说明： xxxxxxxxxxxx</p>
-        <p>导入格式下载： XXXX.xlsx</p>
+        <p class="uploadExplain">上传说明： xxxxxxxxxxxx</p>
+        <p class="uploadExplain">导入格式下载： XXXX.xlsx</p>
         <div class="upload-content">
             <Upload :Format="format"></Upload>
         </div>
@@ -24,7 +24,9 @@ export default {
 <style scoped>
 .container{
     padding-left: 150px;
-    line-height: 50px;
+}
+.uploadExplain{
+    margin: 20px;
 }
 .upload-content{
     width: 260px;
