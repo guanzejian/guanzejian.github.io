@@ -17,7 +17,10 @@ export default {
     },
     components:{
         Upload
-    }
+    },
+    created() {
+        console.log(this.$store.state.token)
+    },
 }
 </script>
 

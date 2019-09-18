@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <p>{{ msg }}</p>
-   
+    <Button @click="gologin">去登录</Button>
   </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
   data() {
     return {
       msg:"welcome! "
+    }
+  },
+  methods: {
+    gologin(){
+      this.$router.push({name: 'login',params:{ isLogin: false }})
     }
   },
 }

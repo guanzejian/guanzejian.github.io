@@ -17,5 +17,10 @@ export default [
         path:'/loadmessage',
         name:'loadmessage',
         component: ()=> import('./components/loadmessage.vue') 
+     },
+     {
+        path:'/login',
+        name:"login",
+        component:()=> import('./components/login.vue')
      }
 ]

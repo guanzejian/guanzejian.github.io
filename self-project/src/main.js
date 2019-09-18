@@ -11,6 +11,8 @@ Vue.use(iview);
 import "./assets/css/normalize.css"   // 引入初始化的css
 import "./assets/css/ssbase.css"   // 引入初始化的css
 
+import store from './vuex/store.js'  // 引入vuex
+
 const RouterConfig = {
   routes: Routers
 };
@@ -26,5 +28,8 @@ VueRouter.prototype.push = function push(location) {
 
 new Vue({
   router,
-  render: h => h(App),
+  store,
+  render: h => h(App)
 }).$mount('#app')
+
+
