@@ -20,6 +20,8 @@ export default {
     },
     created() {
         console.log(this.$store.state.token)
+        this.$store.commit('change',10)
+        console.log(this.$store.state.token)
     },
 }
 </script>
