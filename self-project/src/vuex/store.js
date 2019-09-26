@@ -6,7 +6,7 @@ Vue.use(Vuex)
 var token = JSON.parse( localStorage.getItem("token") || '[]');
 export default new Vuex.Store({
   state: {
-    token: '管泽健'
+    token: 'TOKEN-TRUE'
   },
   mutations:{
     change(state,n){
