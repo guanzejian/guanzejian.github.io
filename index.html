@@ -13,91 +13,29 @@
        /* body{
            min-height: 1000px;
        } */
-        .top{
-            width: 50px;
-            height: 50px;
-            box-sizing: border-box;
-            font-size: 12px;
-            background-color: rgba(f,f ,f , 0.3);
-            line-height: 65px;
-            text-align: center;
-            box-shadow: 0 3px 5px #333,0 0 5px #fff inset,0 0 3px #333;
-            position: fixed;
-            right: 10px;
-            bottom: 100px;
-            border-radius: 50%;
-            transition: 0.5s;
-            transform: scale(0);
-        }
-        .top:after{
-            content: "";
-            width: 20px;
-            height: 20px;
-            box-sizing: border-box;
-            display: block;
-            border: transparent;
-            border-top: 1px solid #333;
-            border-right: 1px solid #333;
-            position: absolute;
-            top: 0;left: 0;right: 0;bottom:0;
-            margin: auto;
-            transform: rotateZ(-45deg);
-        }
+       .main{
+           width: 1200px;
+           margin:0 auto;
+           border:1px solid #ccc;
+       }
 
-        /* --------------------------------------- */
 
-*{padding: 0; margin:0;}  
-    html{font-size: 40px;}  
-    body, html{width: 100%; height: 100%;}  
-    .wrap{ position: relative; width:100%; height:100%;}  
-    .home{width: 100%; height:100%; background: url(bg.jpg) no-repeat; background-size: 100% 100%;}  
-    .loading{position: absolute; width: 100%; height: 100%; background: #fff; z-index: 99;}  
-    .loading p{position: fixed; left: 50%; top: 50%; -webkit-transform: translate(-50%,-50%); text-align: center; color: #222; font-size:0.8rem;}
-   .loading .process{ position: absolute;
-        top: 50%; left: 50%; -webkit-transform:translate(-50%,-50%);
-        width: 90%; height: 30px;
-        border-radius: 3px;
-        border: 1px solid #ccc;
-        background: #fff;
-        overflow: hidden;
-    }
-
-     .loading .process .cs{background: #899; width:0%; height: 100%;}
     </style>
 
-    <script>
-        document.onreadystatechange = loadingChange;//当页面加载状态改变的时候执行这个方法.  
-        function loadingChange()   
-        {   
-            if(document.readyState == "complete"){//当页面加载状态为完全结束时进入   
-                $(".process .cs").animate({width:"100%"},function(){
-                     $(".loading").hide();//当页面加载完成后将loading页隐藏  
-                     $('.wrap').show();
-                });
-            }   
-        }
-    </script>
+
 </head>
 <body>
-<div>234567890p34567890345678904567890234567890p34567890345678904567890234567890p34567890345678904567890234567890p34567890345678904567890234567890p34567890345678904567890234567890p34567890345678904567890234567890p34567890345678904567890234567890p34567890345678904567890234567890p34567890345678904567890234567890p34567890345678904567890</div>
-
-        <div class="wrap" style="display: none;">  
-                <section class="home">
-                   
-                </section>  
-            </div>  
-            <div class="loading">  
-                 <div class="process">
-                     <div class="cs"></div>
-                 </div>
-            </div> 
-<!-- --------------------------------------------------------- -->
-
+    <!-- <header>
+        <img src="https://i.loli.net/2019/09/12/8djbwnSNksgzeOA.jpg" alt="">
+    </header> -->
     <header>
-        <!-- <img src="https://i.loli.net/2019/09/12/8djbwnSNksgzeOA.jpg" alt=""> -->
+        <!-- 管泽健个人简历 -->
     </header>
-
-
+    <div class="main">
+        <div class="form">
+            
+        </div>
+    </div>
 
     <div class="top" onclick="Top(50)">TOP</div>
 

@@ -7,3 +7,39 @@ html,body{
 .large-header{
     background: #7B6666
 }
+
+.top{
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    font-size: 12px;
+    background-color: rgba(f,f ,f , 0.3);
+    line-height: 65px;
+    text-align: center;
+    box-shadow: 0 3px 5px #333,0 0 5px #fff inset,0 0 3px #333;
+    position: fixed;
+    right: 10px;
+    bottom: 100px;
+    border-radius: 50%;
+    transition: 0.5s;
+    transform: scale(0);
+}
+.top:after{
+    content: "";
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    display: block;
+    border: transparent;
+    border-top: 1px solid #333;
+    border-right: 1px solid #333;
+    position: absolute;
+    top: 0;left: 0;right: 0;bottom:0;
+    margin: auto;
+    transform: rotateZ(-45deg);
+}
+
+header{
+    text-align: center;
+    line-height: 100px;
+}
