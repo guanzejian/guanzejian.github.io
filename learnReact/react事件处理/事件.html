@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Hello React!</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <a href="http://baidu.com" onclick="console.log('点击') ; return false">原生点我</a>
+    
+    <script type="text/babel">
+    /* 
+        react 事件绑定属性的命名采用驼峰式写法，而不是小写
+    */ 
+//    在react中不能用返回false 阻止默认行为，你必须明确使用preventDefault 
+    
+// 阻止链接默认打开新页面 ，正常写法：
+    // <a href="#" onclick="console.log('点击') ; return false">点我</a>
+// 在react中： 
+class ActionLink extends React.Component {
+    handleClick(e) {
+        e.preventDefault();
+        console.log("链接被点击")
+    }
+
+    render() {
+        return (
+            <a href="http://baidu.com" onClick={this.handleClick}>点我</a>
+        )
+    }
+}
+ReactDOM.render(<ActionLink />,document.getElementById("app"))
+     
+
+
+
+
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- jsx 语法 -->
+<script type="text/babel">
+//  一、自定义属性  data-属性名 的方式 
+        ReactDOM.render(
+            <div>
+                <span data-option="someValue"></span>
+            </div>
+        )
+        
+
+// 独立文件
+// React JSX 代码可以放在一个独立文件上，例如我们创建一个 helloworld_react.js 文件，代码如下：
+    //hello_react.js  
+        ReactDOM.render(
+            <h1>Hello, world!</h1>,
+            document.getElementById('example')
+        );
+    // 在需要这个js 的地方引用一下就可以。就像使用普通js 的方法一样引入
+    // <script src="./hello_react.js"><\/script>
+    
+// 支持marsta 语法
+        ReactDOM.render(
+            <div>
+                <h1>{ 1+1 }</h1>
+            </div>
+        )
+
+// jsx 中不支持if else 语句， 但是可以使用三目运算代替
+        <div>{ flag ? "1" : "0" }</div>
+
+// jsx 中 注释需要写在花括号中
+        {/*注释...*/}
+        ReactDOM.render(
+            <div>
+                {/*注释部分*/}
+                <h1></h1>
+            </div>
+        )
+
+// jsx 语法中可以使用数组
+    var arr = [
+        <h1>123</h1>,
+        <h2>456</h2>,
+        <h3>789</h3>
+    ];
+    ReactDOM.render(
+        <div>{arr}</div>
+        document.getElementById("app")
+    )
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>React 实例</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/babel">
+class Child extends React.Component{
+    render (){
+        return <option value={ this.props.list }>{ this.props.list }</option>
+    }
+}
+class UserGist extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { value: "taobao" }
+    }
+    preventDefault = (e) =>{
+        console.log("您选择了"+ this.state.value)
+        e.preventDefault()
+    }
+
+    hangChange = (e) =>{
+        this.setState({
+            value : e.target.value
+        })
+    }
+    render(){
+        const options = this.props.list.map((item,i) =>
+            <Child list={item} key={i}/>
+        )
+        return (
+            <form onSubmit={ this.preventDefault }>
+                <select value={ this.state.value} onChange={this.hangChange} >
+                    { options }
+                </select>
+                <input type="submit" value="提交" />
+            </form>
+        )
+    }
+}
+const list = ["taobao", "tianmao", "JD"]
+ReactDOM.render(
+  <UserGist list={ list } />,
+  document.getElementById('example')
+);
+</script>
+
+</body>
+</html>

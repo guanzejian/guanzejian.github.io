@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Hello React!</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+// map 遍历生成数字列表
+    // const number = [1,2,3,4,5];
+    // const listItem = number.map(numItem =>{
+    //     return (<li>{numItem}</li>) 
+    // })
+    // ReactDOM.render(
+    //     <ul>{listItem}</ul>,
+    //     document.getElementById("app")
+    // )
+
+// keys  可以在DOM 中的某些元素被增加或删除的时候帮助react 识别哪些元素发生了变化，
+// 注意： 变量使用在return 中，需要用 花括号 { 变量名 }
+    // function NumberList(props){
+    //     const numbers = props.numbers;
+    //     const List = numbers.map(item =>{
+    //         return (
+    //             // 这个地方使用key 不好，根据下标来确定key ，很影响性能；实际使用应该在组件调用的时候把key 带上
+    //             <li key={item.toString() }>
+    //                 {item}
+    //             </li>
+    //         )
+    //     })
+    //     return (
+    //         <ul>
+    //             {List}
+    //         </ul>
+    //     )
+    // }
+
+    // const numbers = [1,2,3,4,5]
+    // ReactDOM.render(
+    //     <NumberList numbers={numbers} />,
+    //     document.getElementById("app")
+    // )
+
+// key 的正确使用
+    function ListItem (props){
+        return (
+            <li> { props.item } </li>
+        )
+    }
+
+    function NumberList (props){
+        const numbers = props.numbers;
+        const List = numbers.map(item => 
+            // key应该写在这里
+            <ListItem key={item.toString()} item={item}/>
+        )
+
+        return (
+            <ul>
+                { List }
+            </ul>
+        )
+    }
+
+    const numbers = [1,2,3,4,5];
+    ReactDOM.render(
+        <NumberList numbers={ numbers }/>
+        ,document.getElementById("app")
+    )
+
+    </script>
+</body>
+</html>

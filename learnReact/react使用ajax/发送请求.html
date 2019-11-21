@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>React 实例</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/babel">
+class UserGist extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {url: '', name: ''};
+    }
+    sendRequest = () =>{
+        $.get(this.props.source, res =>{
+            const aData = res[0];
+            this.setState({
+                url: aData.url,
+                name: aData.owner.login
+            })
+        })
+    }
+    componentDidMount(){
+        this.sendRequest()        
+    }
+    componentWillUnmount(){
+
+    }
+    render(){
+        return (
+            <div> {this.state.url} --- {this.state.name}</div>
+        )
+    }
+}
+ReactDOM.render(
+  <UserGist source="https://api.github.com/users/octocat/gists" />,
+  document.getElementById('example')
+);
+</script>
+
+</body>
+</html>

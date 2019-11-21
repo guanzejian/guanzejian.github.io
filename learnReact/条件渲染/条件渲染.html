@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Hello React!</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+    // 登录组件
+    class Login extends React.Component {
+        render(){
+            return (
+                <h1>我是登录组件</h1>
+            )
+        }
+    }
+    //注册组件 
+    class Register extends React.Component {
+        render(){
+            return (
+                <h1>我是注册组件</h1>
+            )
+        }
+    }
+
+    class IsLogin extends React.Component {
+        constructor(props){
+            super(props);
+            this.state = { isLogin : true }
+        }
+
+        handleClick = () =>{
+            this.setState({
+                isLogin: !this.state.isLogin
+            })
+        }
+
+        render(){
+            const Button = <button onClick={this.handleClick}>{this.state.isLogin ? "去注册": "去登录"}</button>;
+            if(this.state.isLogin){
+                return (
+                    <div>
+                        {Button}
+                        <Login />
+                    </div>
+                )
+            }else{
+                return (
+                    <div>
+                        {Button}
+                        <Register />
+                    </div>
+                )
+            }
+        }
+        
+        
+    }
+
+    ReactDOM.render(
+        <IsLogin />,
+        document.getElementById("app")
+    )
+    
+    </script>
+</body>
+</html>

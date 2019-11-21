@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Hello React!</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+    /* 
+        React 把组件看成是一个状态机， 通过与用户的交互，实现不同状态，然后渲染UI ，让用户界面和数据保持一致。
+     *  react 里，只需更新组件的state ，然后根据新的state 重新渲染用户界面。（不用操作dom）。react也是使用虚拟DOM
+    */ 
+    
+    class Clock extends React.Component{
+        constructor(props){
+            super(props),
+            this.state = { date: new Date() }
+        }
+        componentDidMount(){
+            this.timer = setInterval(() => {
+                this.setState({
+                    date : new Date()
+                })
+            }, 1000);
+        }
+        componentWillUnmount(){
+            clearInterval(this.timer);
+        }
+      
+        render(){
+            return (
+                <div>
+                    <h2>now : { this.state.date.toLocaleTimeString() }</h2>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <Clock/>
+        ,document.getElementById("app")
+    )
+    
+
+    
+    </script>
+</body>
+</html>

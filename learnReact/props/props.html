@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Hello React!</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+    /* 
+        state 和 props 的主要区别在于：
+            props是不可变的， 而state 是根据用户交互来改变。
+            这就是为什么有些组件需要定义state 来更新和修改数据，而子组件只能通过props 来传递数据
+    */ 
+    // function Hello(props){
+    //     return <h1>{props.name}</h1>
+    // }
+    // ReactDOM.render(
+    //     <Hello name="789"/>,
+    //     document.getElementById("app")
+    // )
+    
+
+    // state 和 props 应用
+
+     class WebSite extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = {
+                name: '百度',
+                site: 'http://baidu.com'
+            }
+        }
+        render(){
+            return (
+                <div>
+                    <Name name={this.state.name}/>
+                    <Link link={this.state.site}/>
+                </div>
+            )
+        }
+     } 
+
+     class Name extends React.Component{
+         render(){
+             return (
+                 <div>
+                    <h1>{this.props.name}</h1>
+                 </div>
+             )
+         }
+     }
+
+     class Link extends React.Component{
+         render(){
+             return (
+                 <div>
+                    <a href={this.props.link}>百度</a>
+                 </div>
+             )
+         }
+     }
+
+    //  Link.propTypes = {
+    //     link: PropTypes.string
+    // };
+    ReactDOM.render(<WebSite />,document.getElementById("app"))
+     
+
+
+
+    
+    </script>
+</body>
+</html>

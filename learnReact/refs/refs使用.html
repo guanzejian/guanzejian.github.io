@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>React 实例</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/babel">
+// refs 和vue 的用法基本一样。引用所指的那个ref
+
+
+class UserGist extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {value : ''}
+    }
+
+    handle = () =>{
+        alert(this.refs.myinput.value)
+    }
+
+    handChange = (e) =>{
+        this.setState({
+            // value : e.target.value
+            value: this.refs.myinput.value
+        })
+    }
+    render(){
+        return <div>
+            <input type="text" onChange={this.handChange} onBlur={ this.handle } ref="myinput" value={ this.state.value } />
+            </div>
+    }
+}
+ReactDOM.render(
+  <UserGist />,
+  document.getElementById('example')
+);
+</script>
+
+</body>
+</html>

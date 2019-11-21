@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Hello React!</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+    // 创建name组件, 多层props 传值
+
+    class Url extends React.Component{
+        render(){
+            return (
+                <div>
+                    <b>{this.props.name}</b>
+                    <a href={this.props.url} target="_blank" >{this.props.aName}</a>
+                </div>
+            )
+        }
+    }
+
+    function App(props){
+        return (
+            <div>
+                <Url name={props.name} url={props.url} aName={props.aName} />
+            </div>
+        )
+    };
+
+    ReactDOM.render(
+        <App name={"菜鸟教程"} url={"http://www.runoob.com"} aName={"进入菜鸟"}/>,
+        document.getElementById('app')
+    );
+    </script>
+</body>
+</html>

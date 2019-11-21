@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Hello React!</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <script type="text/babel">
+    /* 
+        react 事件绑定属性的命名采用驼峰式写法，而不是小写
+    */ 
+class Toggle extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { isToggle : true };
+
+        // 类 当中的方法，默认不会绑定this ，调用this 会是个ubdefined 。 所以用bind 指向 构造器的this 
+        // this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick = ()=> {
+        this.setState({
+            isToggle : !this.state.isToggle
+        })
+    }
+
+    render(){
+        return (
+            <button type="button" onClick={this.handleClick}>{this.state.isToggle ? "开" : "关"}</button>
+        )
+    }
+}
+ReactDOM.render(<Toggle />,document.getElementById("app"))
+     
+
+
+
+
+    
+    </script>
+</body>
+</html>
