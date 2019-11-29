@@ -19,7 +19,7 @@
     
 // 阻止链接默认打开新页面 ，正常写法：
     // <a href="#" onclick="console.log('点击') ; return false">点我</a>
-// 在react中： 
+// 在react中： 子组件不允许直接改变父组件的state ，（单向数据流，只能使用不能修改）
 class ActionLink extends React.Component {
     handleClick(e) {
         e.preventDefault();
