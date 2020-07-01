@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .sel>span{
+            padding: 10px 20px;
+        }
+        .content>span:last-child{
+            display: none;
+        }
+        .sel>input:nth-child(1):focus ~ div>span:first-child{
+            display: block;
+        }
+        .sel>input:nth-child(2):focus ~ div>span:last-child{
+            display: block
+        }
+        .sel>input:nth-child(2):focus ~ div>span:first-child{
+            display: none
+        }
+    </style>
+</head>
+<body>
+    <div class="sel">
+        <input type="button" value="cool"><input type="button" value="yeah">
+        <div class="content">
+            <span>我是cool</span><span>我是yeah</span>
+        </div>
+    </div>
+    
+</body>
+</html>
